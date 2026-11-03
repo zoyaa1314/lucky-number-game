@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lucky Number Game</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            background: lightblue;
+            padding-top: 100px;
+        }
+
+        .game {
+            background: white;
+            padding: 30px;
+            margin: auto;
+            width: 300px;
+            border-radius: 15px;
+        }
+
+        h1 {
+            color: darkblue;
+        }
+
+        input, button {
+            padding: 10px;
+            margin: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            background: green;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #message {
+            font-weight: bold;
+            color: darkred;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="game">
+    <h1>Lucky Number Game</h1>
+
+    <p>Guess a number between 1 and 100</p>
+
+    <input type="number" id="guess" placeholder="Enter number">
+
+    <br>
+
+    <button onclick="checkGuess()">Check Number</button>
+
+    <p id="message">Good luck!</p>
+
+    <p>Attempts: <span id="attempts">0</span></p>
+
+    <button onclick="resetGame()">Play Again</button>
+</div>
+
+<script>
+    let luckyNumber = Math.floor(Math.random() * 100) + 1;
+    let attempts = 0;
+
+    function checkGuess() {
+        let guess = Number(document.getElementById("guess").value);
+        let message = document.getElementById("message");
+
+        if (guess < 1 || guess > 100 || guess === 0) {
+            message.innerHTML = "Enter a number from 1 to 100!";
+            return;
+        }
+
+        attempts++;
+        document.getElementById("attempts").innerHTML = attempts;
+
+        if (guess === luckyNumber) {
+            message.innerHTML = "🎉 Congratulations! You won!";
+        }
+        else if (guess < luckyNumber) {
+            message.innerHTML = "Too low! Try a higher number.";
+        }
+        else {
+            message.innerHTML = "Too high! Try a lower number.";
+        }
+    }
+
+    function resetGame() {
+        luckyNumber = Math.floor(Math.random() * 100) + 1;
+        attempts = 0;
+
+        document.getElementById("attempts").innerHTML = 0;
+        document.getElementById("message").innerHTML = "Good luck!";
+        document.getElementById("guess").value = "";
+    }
+</script>
+
+</body>
+</html>
